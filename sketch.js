@@ -18,8 +18,14 @@ function setup() {
   grid = make2DArray(cols, rows);
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      grid[i][j] = new Cell(i * w, j * w, w);
+      grid[i][j] = new Cell(i, j, w);
     }
+  }
+}
+
+for (var i = 0; i < cols; i++) {
+  for (var j = 0; j < rows; j++) {
+    grid[i][j].countBees();
   }
 }
 
@@ -27,7 +33,7 @@ function mousePressed() {
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
       if (grid[i][j].contains(mouseX, mouseY)) {
-        
+        grid[i][j].reveal();
       }
     }
   }
