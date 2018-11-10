@@ -5,11 +5,8 @@ function Cell(i, j, w) {
   this.y = j * w;
   this.w = w;
   this.neighborCount = 0;
-  if (random(1) < 0.5) {
-    this.bee = true;
-  } else {
-    this.bee = false;
-  }
+
+  this.bee = false;
   this.revealed = false;
 }
 
@@ -24,9 +21,11 @@ Cell.prototype.show = function() {
     } else {
       fill(190);
       rect(this.x, this.y, this.w, this.w);
-      textAlign(CENTER);
-      fill(0);
-      text(this.neighborCount, this.x + this.w * 0.5, this.y + this.w - 6);
+      if(this.neighborCount > 0) {
+        textAlign(CENTER);
+        fill(0);
+        text(this.neighborCount, this.x + this.w * 0.5, this.y + this.w - 6);
+      }
     }
   }
 }
@@ -48,8 +47,7 @@ Cell.prototype.countBees = function () {
       }
     }
   }
-
-  this.neighborCount = total;
+  return this.neighborCount = total;
 }
 
 Cell.prototype.contains = function (x, y) {
